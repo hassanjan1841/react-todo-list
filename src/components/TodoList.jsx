@@ -34,6 +34,7 @@ const TodoList = ({ tasks, handleTask, deleteTask, isCompleted }) => {
               setText((prev) => ({ ...prev, category: e.target.value }))
             }
           >
+            <option value="Programming">Category</option>
             <option value="Programming">Programming</option>
             <option value="Personal">Personal</option>
             <option value="Important">Important</option>
