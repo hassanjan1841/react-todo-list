@@ -18,6 +18,8 @@ const Todo = ({ task, deleteTask, completeTask = false }) => {
           <input
             type="checkbox"
             className="m-2"
+            name="isCompleted"
+            checked={task.isCompleted}
             onChange={(e) => completeTask(e.target.checked)}
           />
           <CloseButton onClick={deleteTask} />
