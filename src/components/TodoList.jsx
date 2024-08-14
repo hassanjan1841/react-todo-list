@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "./Button";
 import Todo from "./Todo";
 
-const TodoList = ({ tasks, handleTask }) => {
+const TodoList = ({ tasks, handleTask, deleteTask }) => {
   const [task, setText] = useState({
     text: "",
     category: "Programming",
@@ -37,11 +37,15 @@ const TodoList = ({ tasks, handleTask }) => {
             <option value="Personal">Personal</option>
             <option value="Important">Important</option>
           </select>
-          <Button text={"Add Task"} addTask={() => handleTask(task)} />
+          <Button text={"Add Task"} addTask={(e) => handleTask(task)} />
         </div>
         <div className="flex flex-wrap -m-2">
           {tasks.map((task) => (
-            <Todo task={task} key={task.id} />
+            <Todo
+              task={task}
+              key={task.id}
+              deleteTask={() => deleteTask(task.id)}
+            />
           ))}
         </div>
       </div>

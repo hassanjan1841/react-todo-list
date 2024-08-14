@@ -30,8 +30,21 @@ function App() {
 
   return (
     <>
-      {isTaskEmpty && <Modal text="Task cannot be empty" />}
-      <TodoList tasks={tasks} handleTask={handleTask} />
+      {isTaskEmpty && (
+        <Modal
+          text="Task cannot be empty"
+          changeIsEmpty={() => {
+            setIsTaskEmpty(false);
+          }}
+        />
+      )}
+      <TodoList
+        tasks={tasks}
+        handleTask={handleTask}
+        deleteTask={(taskId) =>
+          setTasks(tasks.filter((task) => task.id !== taskId))
+        }
+      />
     </>
   );
 }
