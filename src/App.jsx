@@ -26,6 +26,7 @@ function App() {
       return;
     }
     setTasks((prev) => [...prev, { ...task, id: prev.length + 1 }]);
+    task.text = "";
   };
 
   return (

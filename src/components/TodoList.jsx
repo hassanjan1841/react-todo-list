@@ -23,6 +23,7 @@ const TodoList = ({ tasks, handleTask, deleteTask }) => {
             onChange={(e) =>
               setText((prev) => ({ ...prev, text: e.target.value }))
             }
+            value={task.text}
           />
           <select
             name=""
