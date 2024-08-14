@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "./Button";
 import Todo from "./Todo";
 
-const TodoList = ({ tasks, handleTask, deleteTask }) => {
+const TodoList = ({ tasks, handleTask, deleteTask, isCompleted }) => {
   const [task, setText] = useState({
     text: "",
     category: "Programming",
@@ -46,6 +46,7 @@ const TodoList = ({ tasks, handleTask, deleteTask }) => {
               task={task}
               key={task.id}
               deleteTask={() => deleteTask(task.id)}
+              completeTask={isCompleted(task.id)}
             />
           ))}
         </div>

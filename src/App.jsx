@@ -45,6 +45,13 @@ function App() {
         deleteTask={(taskId) =>
           setTasks(tasks.filter((task) => task.id !== taskId))
         }
+        isCompleted={(taskId) => (isCompleted) => {
+          setTasks(
+            tasks.map((task) =>
+              task.id === taskId ? { ...task, isCompleted } : task
+            )
+          );
+        }}
       />
     </>
   );
