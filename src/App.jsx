@@ -18,7 +18,18 @@ function App() {
       isCompleted: false,
     },
   ]);
+  const [filteredTask, setFilteredTask] = useState(tasks);
 
+  const handleCategory = (category) => {
+    console.log(category);
+    if (category == "Completed") {
+      setFilteredTask(tasks.filter((task) => task.isCompleted === true));
+    } else if (category == "Not Completed") {
+      setFilteredTask(tasks.filter((task) => task.isCompleted === false));
+    } else {
+      setFilteredTask(tasks);
+    }
+  };
   const handleTask = (task) => {
     console.log(task);
     if (task.text === "") {
@@ -40,7 +51,7 @@ function App() {
         />
       )}
       <TodoList
-        tasks={tasks}
+        tasks={filteredTask}
         handleTask={handleTask}
         deleteTask={(taskId) =>
           setTasks(tasks.filter((task) => task.id !== taskId))
@@ -52,6 +63,7 @@ function App() {
             )
           );
         }}
+        handleCategory={handleCategory}
       />
     </>
   );
