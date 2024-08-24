@@ -9,10 +9,8 @@ const Todo = ({ task, deleteTask, completeTask = false }) => {
         }`}
       >
         <div className="flex-grow">
-          <h2 className="text-gray-900 title-font font-medium">
-            {task.category}
-          </h2>
-          <p className="text-gray-500">{task.text}</p>
+          <h2 className="text-gray-900 title-font font-medium">{task.text}</h2>
+          <p className="text-gray-500">{task.category}</p>
         </div>
         <div className="flex flex-col justify-between ">
           <input
