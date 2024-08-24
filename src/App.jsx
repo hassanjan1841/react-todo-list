@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoList from "./components/TodoList";
 import Modal from "./components/Modal";
 
@@ -21,22 +21,30 @@ function App() {
   const [filteredTask, setFilteredTask] = useState(tasks);
 
   const handleCategory = (category) => {
-    console.log(category);
-    if (category == "Completed") {
-      setFilteredTask(tasks.filter((task) => task.isCompleted === true));
-    } else if (category == "Not Completed") {
-      setFilteredTask(tasks.filter((task) => task.isCompleted === false));
-    } else {
-      setFilteredTask(tasks);
+    switch (category) {
+      case "Completed":
+        setFilteredTask(tasks.filter((task) => task.isCompleted === true));
+        break;
+      case "Not Completed":
+        setFilteredTask(tasks.filter((task) => task.isCompleted === false));
+        break;
+      default:
+        setFilteredTask(tasks);
+        break;
     }
   };
+
+  useEffect(() => {
+    setFilteredTask(tasks);
+  }, [tasks]);
+
   const handleTask = (task) => {
-    console.log(task);
     if (task.text === "") {
       setIsTaskEmpty(true);
       return;
     }
     setTasks((prev) => [...prev, { ...task, id: prev.length + 1 }]);
+
     task.text = "";
   };
 
