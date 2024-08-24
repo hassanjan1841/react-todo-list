@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import TodoList from "./components/TodoList";
 import Modal from "./components/Modal";
 
@@ -19,14 +19,18 @@ function App() {
     },
   ]);
   const [filteredTask, setFilteredTask] = useState(tasks);
-
+  const [category, setCategory] = useState(false);
+  const [clickedCategory, setClickedCategory] = useState("All");
   const handleCategory = (category) => {
+    setClickedCategory(category);
     switch (category) {
       case "Completed":
         setFilteredTask(tasks.filter((task) => task.isCompleted === true));
+        setCategory(true);
         break;
       case "Not Completed":
         setFilteredTask(tasks.filter((task) => task.isCompleted === false));
+        setCategory(false);
         break;
       default:
         setFilteredTask(tasks);
@@ -35,8 +39,16 @@ function App() {
   };
 
   useEffect(() => {
-    setFilteredTask(tasks);
+    setFilteredTask(tasks.filter((task) => task.isCompleted == category));
   }, [tasks]);
+
+  const handleIsCompleted = (taskId) => (isCompleted) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, isCompleted } : task
+      )
+    );
+  };
 
   const handleTask = (task) => {
     if (task.text === "") {
@@ -64,14 +76,9 @@ function App() {
         deleteTask={(taskId) =>
           setTasks(tasks.filter((task) => task.id !== taskId))
         }
-        isCompleted={(taskId) => (isCompleted) => {
-          setTasks(
-            tasks.map((task) =>
-              task.id === taskId ? { ...task, isCompleted } : task
-            )
-          );
-        }}
+        isCompleted={handleIsCompleted}
         handleCategory={handleCategory}
+        clickedCategory={clickedCategory}
       />
     </>
   );

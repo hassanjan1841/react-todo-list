@@ -9,6 +9,7 @@ const TodoList = ({
   deleteTask,
   isCompleted,
   handleCategory,
+  clickedCategory,
 }) => {
   const [task, setText] = useState({
     text: "",
@@ -51,7 +52,10 @@ const TodoList = ({
 
           <Button text={"Add Task"} addTask={(e) => handleTask(task)} />
         </div>
-        <Categories onClick={handleCategory} />
+        <Categories
+          onClick={handleCategory}
+          clickedCategory={clickedCategory}
+        />
         <div className="flex flex-wrap -m-2">
           {tasks.map((task) => (
             <Todo
